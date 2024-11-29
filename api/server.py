@@ -2,7 +2,24 @@ from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from db.models import Supplier, supplier_pydantic, supplier_pydanticIn, Product, product_pydantic, product_pydanticIn
 
+# Library CORS Headers
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+# Add CORS URLs
+origins = [
+    "http://localhost:3000"
+]
+
+# Add Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = origins,
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"]
+)
 
 register_tortoise(
     app,
