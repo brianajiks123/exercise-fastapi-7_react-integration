@@ -4,7 +4,7 @@ import { ProductContext } from '../ProductContext';
 import { useContext } from 'react';
 
 const NavBar = () => {
-    const [products, setProducts] = useContext(ProductContext)
+    const [products] = useContext(ProductContext)
     
     return (
         <Navbar bg="dark" expand="lg" variant="dark">

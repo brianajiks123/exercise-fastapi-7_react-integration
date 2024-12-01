@@ -7,14 +7,14 @@ const ProductsTable = () => {
     const [products, setProducts] = useContext(ProductContext)
 
     useEffect(() => {
-        fetch("http://localhost:8000/product")
+        fetch("http://127.0.0.1:8000/product")
             .then(res => res.json())
             .then(results => setProducts({"data": [...results.data]}))
             .catch(error => console.error(error))
     })
 
     return (
-        <div className="mt-2 mx-2">
+        <div className="mt-2 mx-3">
             <Table striped bordered hover className="table-sm text-center">
                 <thead>
                     <tr>

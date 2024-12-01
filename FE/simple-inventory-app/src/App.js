@@ -1,8 +1,9 @@
 import './App.css'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import { ProductProvider } from './ProductContext';
 import ProductsTable from './components/ProductsTable';
+import AddProduct from './components/AddProduct';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
           <ProductProvider>
             <NavBar />
             <ProductsTable />
+
+            <Route exact path="/add-product" component={AddProduct} />
           </ProductProvider>
         </Switch>
       </Router>
