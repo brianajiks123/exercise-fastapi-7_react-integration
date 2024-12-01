@@ -12,8 +12,7 @@ function App() {
         <Switch>
           <ProductProvider>
             <NavBar />
-            <ProductsTable />
-
+            <Route exact path="/" component={ProductsTable} />
             <Route exact path="/add-product" component={AddProduct} />
           </ProductProvider>
         </Switch>
