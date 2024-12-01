@@ -1,5 +1,4 @@
-import { Navbar, Nav, Form, FormControl, Button, Badge } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Navbar, Nav, Badge } from 'react-bootstrap'
 import { ProductContext } from '../ProductContext';
 import { useContext } from 'react';
 
@@ -14,11 +13,6 @@ const NavBar = () => {
                 <Nav className="mr-auto">
                     <Badge className="mt-2" variant="primary">Products In Stock: {products.data.length}</Badge>
                 </Nav>
-                <Form className="d-flex align-items-center">
-                    <Link to="/add-product" className="btn btn-primary btn-sm mr-4 w-100">Add Product</Link>
-                    <FormControl type="text" placeholder="Search" className='mr-sm-2' />
-                    <Button type="submit" variant="outline-primary">Search</Button>
-                </Form>
             </Navbar.Collapse>
         </Navbar>
     );

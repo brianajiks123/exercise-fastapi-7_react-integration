@@ -1,10 +1,24 @@
-import { useContext, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Button, Form, FormControl, Table } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 import { ProductContext } from "../ProductContext";
 import ProductsRow from "./ProductsRow";
 
 const ProductsTable = () => {
+    const [search, setSearch] = useState("")
     const [products, setProducts] = useContext(ProductContext)
+
+    const updateSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const filterProduct = (e) => {
+        e.preventDefault()
+
+        const product = products.data.filter(product => product.name.toLowerCase() === search.toLowerCase())
+
+        setProducts({"data": [...product]})
+    }
 
     const handleDelete = (id) => {
         fetch("http://127.0.0.1:8000/product/" + id, {
@@ -35,10 +49,28 @@ const ProductsTable = () => {
 
     return (
         <div className="mt-2 mx-3">
-            <Table striped bordered hover className="table-sm text-center">
+            <div className="row d-flex justify-content-between align-items-center">
+                <div className="col-auto">
+                    <Link to="/add-product" className="btn btn-primary btn-sm">Add Product</Link>
+                </div>
+                <div className="col-auto">
+                    <Form onSubmit={filterProduct} className="d-flex">
+                        <FormControl
+                            value={search}
+                            onChange={updateSearch}
+                            type="text"
+                            placeholder="Search"
+                            className="mr-2"
+                        />
+                        <Button type="submit" variant="outline-primary">Search</Button>
+                    </Form>
+                </div>
+            </div>
+
+            <Table striped bordered hover className="table-sm text-center mt-3">
                 <thead>
                     <tr>
-                        {/* <th>ID</th> */}
+                        <th>ID</th>
                         <th>Product Name</th>
                         <th>Quantity In Stock</th>
                         <th>Quantity Sold</th>
@@ -50,7 +82,7 @@ const ProductsTable = () => {
                 <tbody>
                     {products.data.map((product) => (
                         <ProductsRow
-                            // id = {product.id}
+                            id = {product.id}
                             name = {product.name}
                             quantity_in_stock = {product.quantity_in_stock}
                             quantity_sold = {product.quantity_sold}

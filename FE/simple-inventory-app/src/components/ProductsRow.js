@@ -2,7 +2,7 @@
 const ProductsRow = ({id, name, quantity_in_stock, quantity_sold, unit_price, revenue, handleDelete}) => {
     return(
         <tr>
-            {/* <td>{id}</td> */}
+            <td>{id}</td>
             <td>{name}</td>
             <td>{quantity_in_stock}</td>
             <td>{quantity_sold}</td>
