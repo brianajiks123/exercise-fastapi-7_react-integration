@@ -4,6 +4,8 @@ import NavBar from './components/NavBar'
 import { ProductProvider } from './ProductContext';
 import ProductsTable from './components/ProductsTable';
 import AddProduct from './components/AddProduct';
+import UpdateProduct from './components/UpdateProduct';
+import { UpdateProductContextProvider } from './UpdateProductContext';
 
 function App() {
   return (
@@ -12,8 +14,11 @@ function App() {
         <Switch>
           <ProductProvider>
             <NavBar />
-            <Route exact path="/" component={ProductsTable} />
-            <Route exact path="/add-product" component={AddProduct} />
+            <UpdateProductContextProvider>
+              <Route exact path="/" component={ProductsTable} />
+              <Route exact path="/add-product" component={AddProduct} />
+              <Route exact path="/update-product" component={UpdateProduct} />
+            </UpdateProductContextProvider>
           </ProductProvider>
         </Switch>
       </Router>

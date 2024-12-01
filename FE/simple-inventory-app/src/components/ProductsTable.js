@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { Button, Form, FormControl, Table } from "react-bootstrap";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { ProductContext } from "../ProductContext";
 import ProductsRow from "./ProductsRow";
+import { UpdateContext } from "../UpdateProductContext";
 
 const ProductsTable = () => {
     const [search, setSearch] = useState("")
     const [products, setProducts] = useContext(ProductContext)
+    const [, setUpdateProductInfo] = useContext(UpdateContext)
+
+    let history = useHistory()
 
     const updateSearch = (e) => {
         setSearch(e.target.value)
@@ -38,6 +42,19 @@ const ProductsTable = () => {
                 }
             })
             .catch(error => console.error(error))
+    }
+
+    const handleUpdate = (id) => {
+        const product = products.data.filter(product => product.id === id)[0]
+        setUpdateProductInfo({
+            ProductName: product.name,
+            QuantityInStock: product.quantity_in_stock,
+            QuantitySold: product.quantity_sold,
+            UnitPrice: product.unit_price,
+            Revenue: product.revenue,
+            ProductId: id
+        })
+        history.push("/update-product")
     }
 
     useEffect(() => {
@@ -90,6 +107,7 @@ const ProductsTable = () => {
                             revenue = {product.revenue}
                             key = {product.id}
                             handleDelete = {handleDelete}
+                            handleUpdate = {handleUpdate}
                         />
                     ))}
                 </tbody>
