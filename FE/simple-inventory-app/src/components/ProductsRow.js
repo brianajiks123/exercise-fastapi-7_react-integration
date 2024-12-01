@@ -1,9 +1,8 @@
-import react from 'react'
 
-const ProductsRow = ({id, name, quantity_in_stock, quantity_sold, unit_price, revenue}) => {
+const ProductsRow = ({id, name, quantity_in_stock, quantity_sold, unit_price, revenue, handleDelete}) => {
     return(
         <tr>
-            <td>{id}</td>
+            {/* <td>{id}</td> */}
             <td>{name}</td>
             <td>{quantity_in_stock}</td>
             <td>{quantity_sold}</td>
@@ -12,7 +11,7 @@ const ProductsRow = ({id, name, quantity_in_stock, quantity_sold, unit_price, re
             <td>
                 <button className="btn btn-outline-info btn-sm ml-1 mr-2">Update</button>
                 <button className="btn btn-outline-success btn-sm mr-2">Supplier</button>
-                <button className="btn btn-outline-danger btn-sm mr-2">Delete</button>
+                <button onClick={() => handleDelete(id)} className="btn btn-outline-danger btn-sm mr-2">Delete</button>
             </td>
         </tr>
     );
